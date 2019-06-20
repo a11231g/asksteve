@@ -4,6 +4,7 @@ export function* handleSagaError(error, action, username) {
     try {
 
         const msg = yield error.json();
+        console.log(msg);
         Toast.show(msg.message, {
             duration: Toast.durations.LONG,
             position: Toast.positions.TOP,

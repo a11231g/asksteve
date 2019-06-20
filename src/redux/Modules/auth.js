@@ -76,9 +76,8 @@ export function* watchLogin(client, { password }) {
         const options  = {headers: {}};
         options.headers.authorization = `Basic ${btoa(`${username}:${password}`)}`;
         const response = yield client.get('user',  options );
-        yield put(loginSuccess())
-
-        yield put(saveUser(response))
+        yield put(loginSuccess());
+        yield put(saveUser(response));
         Toast.show(`Hi ${response.name}!`, {
             duration: Toast.durations.LONG,
             position: Toast.positions.TOP,
@@ -88,7 +87,8 @@ export function* watchLogin(client, { password }) {
             delay: 0,
         });
 
-        yield put(loginSuccess())
+        yield put(loginSuccess());
+        NavigationService.navigate('InAppNavigator')
     } catch (error) {
         NavigationService.goBack();
         yield put(loginFailure());

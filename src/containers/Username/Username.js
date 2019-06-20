@@ -37,7 +37,6 @@ class Username extends PureComponent {
 
 
     render() {
-        const { setUsernameConnect } = this.props;
         const { username } = this.state;
         return (
             <View style={styles.container}>

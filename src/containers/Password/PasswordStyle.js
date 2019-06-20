@@ -1,5 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export default  StyleSheet.create({
     container: {
@@ -8,24 +7,6 @@ export default  StyleSheet.create({
         padding: 15,
         justifyContent: 'center',
         alignItems: 'center'
-
-    },
-    register: {
-        color: '#1caff6',
-        alignSelf: 'center',
-        marginTop: 20
-    },
-    image: {
-        width,
-        height,
-        justifyContent: 'center'
-    },
-    wrapper: {
-        justifyContent: 'center',
-        alignSelf: 'center',
-        paddingLeft: 30,
-        paddingRight: 30,
-        width
     },
     Input: {
         width: '100%',

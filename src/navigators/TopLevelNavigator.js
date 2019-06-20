@@ -5,6 +5,8 @@ import {
     Intro,
     Username,
     Password,
+    Project,
+    RepositoryCommits
 } from '../containers';
 
 /**
@@ -23,6 +25,15 @@ const BeforeLoginStack = createStackNavigator({
     },
 }, {gesturesEnabled: true,});
 
+const InAppNavigator = createStackNavigator({
+    Project: {
+        screen: Project,
+        navigationOptions: () => ({title: 'search for commits'})
+    },
+    RepositoryCommits: {
+        screen: RepositoryCommits,
+    },
+}, {gesturesEnabled: true,});
 
 const NavigationStack = createSwitchNavigator({
     Splash: {
@@ -34,6 +45,9 @@ const NavigationStack = createSwitchNavigator({
     },
     beforeLogin: {
         screen: BeforeLoginStack
+    },
+    InAppNavigator: {
+        screen: InAppNavigator
     }
 }, {gesturesEnabled: true,});
 export default createAppContainer(NavigationStack);
