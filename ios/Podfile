@@ -1,0 +1,57 @@
+# The target name is most likely the name of your project.
+ platform :ios, '9.0'
+
+target 'askSteve' do
+
+
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'ART',
+    'RCTActionSheet',
+    'RCTImage',
+    'RCTGeolocation',
+    'RCTLinkingIOS',
+    'RCTSettings',
+    'RCTVibration',
+    'CxxBridge',
+    'DevSupport',
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket',
+    'RCTAnimation',
+    # Add any other subspecs you want to use in your project
+  ]
+  # Explicitly include Yoga if you are using RN >= 0.42.0
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+  # Third party deps podspec link
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'lottie-ios', :path => '../node_modules/lottie-ios'
+
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
+        targets_to_ignore = %w(React yoga)
+
+          if targets_to_ignore.include? target.name
+           target.remove_from_project
+    end
+  end
+end
