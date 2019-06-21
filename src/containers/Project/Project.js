@@ -1,18 +1,46 @@
 import React, { PureComponent } from 'react';
 import {
     View,
-    TextInput
+    TextInput,
+    TouchableOpacity,
+    Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './ProjectStyle';
+import { logout } from '../../redux/Modules/app';
 import { searchCommits } from '../../redux/Modules/searchCommits';
 import Button from '../../components/Button/Button';
 
 class Username extends PureComponent {
+
+    componentDidMount(): void {
+        this.props.navigation.setParams({ logout: this.logout});
+    }
+
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        return {
+            headerRight: (
+                <TouchableOpacity
+                    onPress={() => params.logout()}
+                    style={{ marginRight: 10 }}
+                    activeOpacity={0.95}
+                >
+                    <Text >Log out!</Text>
+                </TouchableOpacity>
+            )
+        };
+    };
+
     static propTypes = {
         searchCommitsConnect: PropTypes.func.isRequired,
+        logoutConnect: PropTypes.func.isRequired,
         loading: PropTypes.bool.isRequired,
+    };
+
+    logout = () => {
+        this.props.logoutConnect();
     };
 
     /**
@@ -64,5 +92,6 @@ class Username extends PureComponent {
 export default connect(state => ({
     loading: state.searchCommits.loading
 }), {
-    searchCommitsConnect: searchCommits
+    searchCommitsConnect: searchCommits,
+    logoutConnect: logout
 })(Username);

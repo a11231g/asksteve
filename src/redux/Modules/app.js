@@ -1,6 +1,8 @@
+import NavigationService from "../../navigators/NavigationService";
+
 export const SKIP_INTRO = 'askSteve/app/SKIP_INTRO';
 export const UPDATE_USER_TOKEN = 'askSteve/app/UPDATE_USER_TOKEN';
-
+export const LOG_OUT = 'askSteve/auth/LOG_OUT';
 
 
 const initialState = {
@@ -13,13 +15,18 @@ export default function reducer(state = initialState, action = {}) {
         case SKIP_INTRO:
             return {
                 ...state,
-                SkippIntro: true
+                SkippIntro: false
             };
         case UPDATE_USER_TOKEN:
             return {
                 ...state,
                 user: action.user,
             };
+        case LOG_OUT:
+            return {
+                ...state,
+                user: {}
+        };
         default:
             return state;
     }
@@ -38,3 +45,17 @@ export function saveUser(user) {
     }
 
 }
+
+export function logout() {
+    return {
+        type: LOG_OUT,
+    };
+}
+export function* watchLogout(client, ) {
+    try {
+        NavigationService.navigate('beforeLogin')
+    } catch (error) {
+
+    }
+}
+

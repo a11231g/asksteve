@@ -1,4 +1,5 @@
 import { call, put, select, take } from 'redux-saga/effects';
+import {encode as btoa} from 'base-64'
 
 import Toast from 'react-native-root-toast';
 import { saveUser } from './app';

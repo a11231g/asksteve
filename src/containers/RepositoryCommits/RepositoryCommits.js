@@ -2,21 +2,43 @@ import React, { PureComponent } from 'react';
 import {
     View,
     FlatList,
-    Text
+    Text, TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './RepositoryCommitsStyle';
 import Commit from '../../components/Commit/Commit'
 import { searchCommits } from '../../redux/Modules/searchCommits';
+import { logout } from '../../redux/Modules/app';
 
 class RepositoryCommits extends PureComponent {
     static propTypes = {
         loginConnect: PropTypes.func.isRequired,
     };
-    static navigationOptions = ({ navigation }) => ({
-        title: `${navigation.state.params.project}`,
-    });
+
+    componentDidMount(): void {
+        this.props.navigation.setParams({ logout: this.logout});
+    }
+
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
+        return {
+            headerRight: (
+                <TouchableOpacity
+                    onPress={() => params.logout()}
+                    style={{ marginRight: 10 }}
+                    activeOpacity={0.95}
+                >
+                    <Text >Log out!</Text>
+                </TouchableOpacity>
+            ),
+            title: `${navigation.state.params.project}`,
+        };
+    };
+
+    logout = () => {
+        this.props.logoutConnect();
+    };
 
     /**
      * Flatlist pull to refresh
@@ -58,5 +80,6 @@ export default connect(state => ({
     loading: state.searchCommits.loading,
     result: state.searchCommits.result
 }), {
-    searchCommitsConnect: searchCommits
+    searchCommitsConnect: searchCommits,
+    logoutConnect: logout
 })(RepositoryCommits);
