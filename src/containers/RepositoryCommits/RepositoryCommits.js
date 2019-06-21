@@ -18,10 +18,17 @@ class RepositoryCommits extends PureComponent {
         title: `${navigation.state.params.project}`,
     });
 
+    /**
+     * Flatlist pull to refresh
+     */
     onRefresh = () => {
         const { navigation } = this.props;
         this.props.searchCommitsConnect(navigation.state.params.project, false, false)
     };
+
+    /**
+     * if flatlist scrolled to end it should fetch more data
+     */
 
     more = () => {
         const { navigation } = this.props;

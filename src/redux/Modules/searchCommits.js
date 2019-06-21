@@ -109,7 +109,9 @@ export function fetching(fetching) {
 
 export function* watchSearchCommits(client, { project, navigate,  more }) {
     try {
-        console.log('comes here')
+        /**
+         * if its fetching any data dont run it again
+         */
         const isFetching = yield select(state => state.searchCommits.fetching);
         if (isFetching) {
             return false;
@@ -129,21 +131,27 @@ export function* watchSearchCommits(client, { project, navigate,  more }) {
 
             yield put(NextPageNumber(CurrentPage + 1));
 
+
+            /**
+             * each fetch returns an array length of 30 so if its less than 30 its the last page
+             */
+
             if (response.length < 30) {
-                console.log('ended')
                 yield put(paginationEndedState(true));
             }
             if (CurrentPage === 1) {
-                console.log('page one')
                 yield put(searchCommitsSuccessful(response))
             } else if (more) {
-                console.log('add more')
                 const oldArray = yield select(state => state.searchCommits.result);
                 const newArray = oldArray.concat(response);
                 yield put(searchCommitsSuccessful(newArray));
             }
 
             if(navigate){
+                /**
+                 * if this function called form project screen should be navigated to the cmomited screen
+                 */
+
                 NavigationService.navigate('RepositoryCommits', {project: project})
             }
         }

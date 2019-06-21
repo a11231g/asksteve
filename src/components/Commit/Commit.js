@@ -14,7 +14,6 @@ export default class Commit extends PureComponent {
 
     render() {
         const { data } = this.props;
-        console.log(data);
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>{data.commit.message.split(/\r?\n/)[0]}</Text>

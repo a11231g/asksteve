@@ -6,7 +6,7 @@ import styles from './ButtonStyle';
 export default class Button extends PureComponent {
     static propTypes = {
         type: PropTypes.oneOf(['primary', 'secondary', 'success']),
-        children: PropTypes.objectOf(PropTypes.any).isRequired,
+        children: PropTypes.any.isRequired,
         onPress: PropTypes.func,
         loading: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -19,7 +19,8 @@ export default class Button extends PureComponent {
         disabled: false,
         type: 'primary',
         style: {},
-        size: 'small'
+        size: 'small',
+        children: ''
     };
 
     handlePress = () => {

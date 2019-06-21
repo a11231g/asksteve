@@ -17,6 +17,9 @@ class Username extends PureComponent {
     };
 
     componentDidMount(): void {
+        /**
+         * if there is already a username in redux it loads it and set to the state.
+         */
         const { username } = this.props;
         if(username){
             this.setState({ username })

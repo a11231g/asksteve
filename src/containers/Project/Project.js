@@ -15,6 +15,10 @@ class Username extends PureComponent {
         loading: PropTypes.bool.isRequired,
     };
 
+    /**
+     * default name of repository to search for commits
+     */
+
     state = {
         project: 'facebook/react-native'
     };
@@ -26,6 +30,9 @@ class Username extends PureComponent {
         searchCommitsConnect(project, true, false);
     };
 
+    /**
+     * it searches for github repository and if it founded , shows the commits on the next screen
+     */
 
     render() {
         const { project } = this.state;
@@ -34,7 +41,7 @@ class Username extends PureComponent {
             <View style={styles.container}>
                 <TextInput
                     style={styles.Input}
-                    placeholder={'enter a github repository name.'}
+                    placeholder={'github repository name like (facebook/react-native)'}
                     onChangeText={(project) => this.setState({ project })}
                     value={project}
                     returnKeyType={'go'}

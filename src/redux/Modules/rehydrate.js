@@ -23,19 +23,26 @@ export function* watchRehydrate(store) {
         persist.app.user &&
         persist.app.user.name
     ) {
+        /**
+         * if user has been logged in
+         */
+
         StatusBar.setBarStyle('light-content', false);
         NavigationService.navigate("InAppNavigator");
 
+    } else if (persist && persist.app && persist.app.SkippIntro) {
+        /**
+         * if user is not logged in but has already skipped the intro
+         */
+
+        NavigationService.navigate("beforeLogin");
     } else {
-        if (
-            persist &&
-            persist.app &&
-            persist.app.SkippIntro
-        ) {
-            NavigationService.navigate("beforeLogin");
-        } else {
-            NavigationService.navigate("Intro");
-        }
+        /**
+         * if user is not logged in and has not skipped the intro
+         */
+
+        NavigationService.navigate("Intro");
     }
+
     yield store.dispatch(rehydrateSuccess());
 }

@@ -9,10 +9,7 @@ import {
     RepositoryCommits
 } from '../containers';
 
-/**
- * app navigator: StackNavigator with 3 screens
- *
- */
+
 const BeforeLoginStack = createStackNavigator({
     Username: {
         screen: Username,

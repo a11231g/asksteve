@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Dimensions, StatusBar, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import LottieView from 'lottie-react-native';
-
-
-const { width, height } = Dimensions.get('window');
 
 export default class Splash extends PureComponent {
     componentWillMount() {
