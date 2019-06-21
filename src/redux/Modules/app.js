@@ -15,7 +15,7 @@ export default function reducer(state = initialState, action = {}) {
         case SKIP_INTRO:
             return {
                 ...state,
-                SkippIntro: false
+                SkippIntro: true
             };
         case UPDATE_USER_TOKEN:
             return {
